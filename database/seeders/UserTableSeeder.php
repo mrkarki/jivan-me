@@ -30,28 +30,28 @@ class UserTableSeeder extends Seeder
         $admin = ModelsUser::create([
             'name'=>'Admin User',
             'email'=>'admin@example.com',
-            'password' => Hash::make(value:'admin@123'),
+            'password' => bcrypt('admin@123'),
             'user_role' => '1',
             'status' => '1'
         ]);
         $manu = ModelsUser::create([
             'name'=>'Manufacturer User',
             'email'=>'manu@example.com',
-            'password' => Hash::make(value:'admin@123'),
+            'password' => bcrypt ('admin@123'),
             'user_role' => '2',
             'status' => '1'
         ]);
         $whole = ModelsUser::create([
             'name'=>'Wholesaler User',
             'email'=>'whole@example.com',
-            'password' => Hash::make(value:'admin@123'),
+            'password' => bcrypt('admin@123'),
             'user_role' => '3',
             'status' => '1'
         ]);
         $user = ModelsUser::create([
             'name'=>'User User',
             'email'=>'user@example.com',
-            'password' => Hash::make(value:'admin@123'),
+            'password' => bcrypt('admin@123'),
             'user_role' => '4',
             'status' => '1'
         ]);

@@ -75,7 +75,11 @@
                    },
 
                    columns: [
-                   {data: 'title',orderable: true},{data: 'slug',orderable: true},{data: 'description',orderable: true},{data: 'parent_name',orderable: true},{data: 'status',orderable: true},
+                   {data: 'id',orderable: true},
+                   {data: 'title',orderable: true},
+                   {data: 'slug',orderable: true},
+                   {data: 'parent_id',orderable: true},
+                   {data: 'status',orderable: true},
                    {data: 'action', orderable: false},
                    ],
                    order: [[ 0, 'desc' ]]

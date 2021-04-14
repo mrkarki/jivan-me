@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
@@ -23,28 +23,22 @@ class TagController extends Controller
 
     public function index(Request $request)
     {
-        $role=Auth::user()->user_role;
         if ($request->ajax()) {
-
             $data = DB::table('tags')
-            ->join('status', 'tags.status', '=', 'status.id')
-            ->select('tags.*', 'status.desc as status')
-            ->get();
+                ->select('id','tag_name','slug','description','status')
+                ->get();
             return datatables()
                 ->of($data)
-                // ->addColumn('created_at', function ($data) {
-                //     return $data->created_at . " <code>{$data->created_at->diffForHumans()}</code>";
-                // })
                 ->addColumn('action', function ($data) {
                     $model = 'tag';
-                    $role=Auth::user()->user_role;
-                    // $role=$role;
-                    return view('admin.common.datatable.action', compact('data', 'model', 'role'))->render();
+                    $role = Auth::user()->user_role;
+                    return view('admin.common.datatable.action', compact('data', 'model','role'))->render();
                 })
-                ->rawColumns(['action', 'created_at',])
+                ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.tag.index',compact('role'));
+
+        return view('admin.tag.index');
     }
 
     /**
@@ -54,11 +48,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
-        //$tags = DB::table('tags')->get();
-        $tags = DB::table('tags')->pluck('title', 'id');
-        //dd($tags);
-        return view('admin.tag.create',  ['tags' => $tags]);
+        return view('admin.tag.create');
     }
 
     /**
@@ -69,25 +59,15 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()){
-            $role=Auth::user()->user_role;
-        }else{
-            $role=1;
-        }
 
-
-        //
         $validated = $request->validate([
-            'title' => 'required|max:255|unique:tags,title,',
+            'tag_name' => 'required|max:255',
         ]);
-
         $tag = new Tag();
-        $tag->title = $request['title'];
-        $tag->slug = $this->slug($tag, $request['title']);
+        $tag->tag_name = $request['tag_name'];
+        $tag->slug = $this->slug($tag, $request['tag_name']);
         $tag->description = $request['description'];
         $tag->status = $request['status'];
-        $tag->created_by = $role;
-        // add other fields
         $tag->save();
         Session::flash('success', 'Record successfully created.');
         return view('admin.tag.index');
@@ -130,27 +110,12 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        // add other fields
-        if(Auth::user()){
-            $role=Auth::user()->user_role;
-        }else{
-            $role=1;
-        }
-        $validated = $request->validate([
-            'title' => 'required|max:255|unique:tags,title,'.$id,
-            //'sku' => 'unique:products,sku',
-        ]);
         $tag = new Tag();
         $tag_update = $tag->find($id);
-        $tag_update->update(['updated_by' => $role]);
-        //return $request;
         $tag_update->update($request->all());
+
         Session::flash('success', 'Record successfully updated.');
         return redirect()->route('admin.tag.index');
-        // $tag->save();
-
-        //return $this->redirect($request);
     }
 
     /**

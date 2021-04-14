@@ -5,7 +5,6 @@ use Illuminate\Support\Str;
 
 /**
  * Trait HelperTrait
- * @package Neputer\Supports\Concerns
  */
 trait HelperTrait
 {

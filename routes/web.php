@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\admin\ProductAttributeController;
+use App\Http\Controllers\admin\ManufactureProductController;
 use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\frontend\ManufacturerUserController;
 use App\Http\Controllers\frontend\WholesalerUserController;
@@ -58,6 +59,7 @@ Route::group(['prefix' => 'admin/', 'as' => 'admin.',  'middleware' => 'auth'], 
     Route::resource('tag', TagController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
+    Route::resource('manufacture-product', ManufactureProductController::class);
     Route::resource('user', UserController::class);
     Route::resource('profile', ProfileController::class);
     Route::resource('attribute', ProductAttributeController::class);

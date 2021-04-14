@@ -48,6 +48,17 @@ $role = Auth::user()->user_role;
     </ul>
 </li>
 
+<li class="{{ (request()->is('admin/manufacture-product*')) ? 'active' : '' }}">
+    <a href="#" aria-expanded="false">
+        <i class="fas fa-cubes"></i> <span class="nav-label">Manufacture Products</span><span class="fa arrow"></span>
+    </a>
+    <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+        <li class="{{ (request()->is('admin/manufacture-product')) ? 'active' : '' }}"><a href="{{ route('admin.manufacture-product.index') }}">List</a></li>
+        <li class="{{ (request()->is('admin/manufacture-product/create')) ? 'active' : '' }}"><a href="{{ route('admin.manufacture-product.create') }}">Add</a></li>
+    </ul>
+</li>
+
+
 <li class="{{ (request()->is('admin/category*')) ? 'active' : '' }}">
     <a href="#" aria-expanded="false">
         <i class="fas fa-sitemap"></i> <span class="nav-label">Category </span><span class="fa arrow"></span>

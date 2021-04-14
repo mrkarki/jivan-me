@@ -14,21 +14,20 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('parent_id')->nullable();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->integer('parent_id')->nullable();
-            $table->string('parent_name')->nullable();
             $table->text('description')->nullable();
-            $table->string('user_role')->nullable();
-            $table->string('keys_rel')->nullable();
-            $table->integer('status');
             $table->string('image')->nullable();
-            $table->string('seo_title')->nullable();
-            $table->string('seo_description')->nullable();
-            $table->string('seo_keyword')->nullable();
+            $table->string('role_id')->nullable();
+            $table->json('rel_key')->nullable();
+            $table->boolean('status')->default(0);
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
+            $table->string('seo_title', 255)->nullable();
+            $table->string('seo_keywords', 255)->nullable();
+            $table->text('seo_description')->nullable();
             $table->timestamps();
         });
     }

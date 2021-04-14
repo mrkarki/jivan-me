@@ -2,7 +2,11 @@
     <table class="table table-striped table-bordered table-hover dataTables-list" style="width: 100%;">
         <thead>
         <tr>
-            <th>Category Name</th><th>Slug</th><th>Description</th><th>Parent</th><th>Status</th>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>Parent_id</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
         </thead>

@@ -4,13 +4,13 @@
 
 @endpush
 
-@section('title', 'tag')
+@section('title', 'category')
 
 @section('content')
 
 @include('admin.common.breadcrumbs', [
 'title' => 'Show',
-'panel' => 'tag',
+'panel' => 'category',
 'id'    => $data['row']->id,
 ])
 
@@ -30,18 +30,34 @@
                         <tbody>
 
                         <tr>
-                            <td style="width:35%;">Title</td>
-                            <td style="width:65%">{{ $data['row']->tag_name }}</td>
-                        </tr>
+    <td style="width:35%;">Category Name</td>
+    <td style="width:65%">{{ $data['row']->title }}</td>
+</tr>
+<tr>
+    <td style="width:35%;">Slug</td>
+    <td style="width:65%">{{ $data['row']->slug }}</td>
+</tr>
 
-                        <tr>
-                            <td style="width:35%;">Description</td>
-                            <td style="width:65%">{{ $data['row']->description }}</td>
-                        </tr>
-                        <tr>
-                            <td style="width:35%;">Status</td>
-                            <td style="width:65%">{{ $data['row']->status }}</td>
-                        </tr>
+<tr>
+    <td style="width:35%;">Description</td>
+    <td style="width:65%">{{ $data['row']->description }}</td>
+</tr>
+<tr>
+    <td style="width:35%;">Parent</td>
+    <td style="width:65%">{{ $data['row']->parent_id }}</td>
+</tr>
+<tr>
+    <td style="width:35%;">Status</td>
+    <td style="width:65%">{{ $data['row']->status }}</td>
+</tr>
+<tr>
+    <td style="width:35%;">Created By</td>
+    <td style="width:65%">{{ $data['row']->created_by }}</td>
+</tr>
+<tr>
+    <td style="width:35%;">Updated By</td>
+    <td style="width:65%">{{ $data['row']->updated_by }}</td>
+</tr>
 
 
                         </tbody>
