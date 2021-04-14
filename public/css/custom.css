@@ -1,0 +1,6 @@
+.form-control:focus:invalid, .single-line:focus:invalid{
+border-color: crimson;
+}
+label.has-error{
+    color: #ed5565;
+}
