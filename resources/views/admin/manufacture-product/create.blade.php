@@ -2,6 +2,8 @@
 
 @push('style')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{{--    <link type="text/css" rel="stylesheet" href="{{ asset() }}aksFileUpload.min.css">--}}
+
 @endpush
 
 @section('title', 'Create a product')
@@ -65,7 +67,47 @@
             });
 
 
-            $('#frame').attr('src',URL.createObjectURL(event.target.files[0]));
+            // $('#frame').attr('src',URL.createObjectURL(event.target.files[0]));
+
+
+            function imgToData(input) {
+                // console.log(input.files.length)
+                var i;
+                for (i = 0; i < input.files.length; i++) {
+                    if (input.files && input.files[i]) {
+                        var File = new FileReader();
+                        var $this = i;
+                        console.log($this);
+                        File.onload = function ($this) {
+                            console.log($this);
+                            var Img = new Image();
+                            Img.onload = function (i) {
+                                // $('#' + input.id + '-val').val(Img.src);
+                                // $('#' + input.id + '-preview').attr('src', Img.src).css('visibility', 'visible').fadeIn();
+                                $('._img-preview').append("<p>dslaj</p>")
+                            };
+                            Img.src = File.result;
+                        };
+
+                        // File.readAsDataURL(input.files[0]);
+                    }
+                }
+            }
+
+            $("input[type='file']").each(function() {
+                $(this).change(function() {
+                    if (parseInt($(this).get(0).files.length) > 3) {
+                        alert("You can only upload a maximum of 3 images");
+                    } else {
+                        imgToData(this);
+                    }
+                });
+            });
+
+
+
+
+
         });
     </script>
 

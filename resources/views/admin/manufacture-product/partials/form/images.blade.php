@@ -9,10 +9,19 @@
             } ?>
             <div class="form-group upload-image" style="<?php echo $display; ?>">
                 <label for="image">Choose Image</label>
-                {!! Form::file('image', null, ['class' => 'form-control']) !!}
+{{--                {!! Form::file('image', null, ['class' => 'form-control']) !!}--}}
                 {{-- <input id="image" type="file" name="image"> --}}
-
+{{--                <input type="file" id="img-1" multiple/>--}}
             </div>
+
+
+            <div>
+                <input type="file" id="img-1" multiple/>
+                <input type="text" id="img-1-val" />
+                <img id="img-1-preview" width="200" height="200" />
+                <div class="_img-preview"></div>
+            </div>
+
 
 
         </fieldset>
