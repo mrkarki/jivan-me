@@ -2,8 +2,38 @@
 
 @push('style')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-{{--    <link type="text/css" rel="stylesheet" href="{{ asset() }}aksFileUpload.min.css">--}}
+    <style type="text/css">
 
+        input[type="file"] {
+            display: block;
+        }
+        .imageThumb {
+            max-height: 75px;
+            border: 2px solid;
+            padding: 1px;
+            cursor: pointer;
+        }
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+        .single {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+        .remove {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+        .remove:hover {
+            background: white;
+            color: black;
+        }
+    </style>
 @endpush
 
 @section('title', 'Create a product')
@@ -54,7 +84,7 @@
     <!-- SUMMERNOTE -->
     <script src="{{ asset('assets/admin/js/plugins/summernote/summernote-bs4.js') }}"></script>
     @include('admin.product.partials.script')
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
             $('.tag-select-multiple').select2({
                 placeholder: "Select a tag",
@@ -67,43 +97,55 @@
             });
 
 
-            // $('#frame').attr('src',URL.createObjectURL(event.target.files[0]));
 
+            if (window.File && window.FileList && window.FileReader) {
+                $("#files").on("change", function(e) {
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    console.log(files)
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
 
-            function imgToData(input) {
-                // console.log(input.files.length)
-                var i;
-                for (i = 0; i < input.files.length; i++) {
-                    if (input.files && input.files[i]) {
-                        var File = new FileReader();
-                        var $this = i;
-                        console.log($this);
-                        File.onload = function ($this) {
-                            console.log($this);
-                            var Img = new Image();
-                            Img.onload = function (i) {
-                                // $('#' + input.id + '-val').val(Img.src);
-                                // $('#' + input.id + '-preview').attr('src', Img.src).css('visibility', 'visible').fadeIn();
-                                $('._img-preview').append("<p>dslaj</p>")
-                            };
-                            Img.src = File.result;
-                        };
+                            $("<span class=\"pip\">" +
+                                "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                                "<br/><span class=\"remove\">Remove image</span>" +
+                                "</span>").insertAfter("#files");
 
-                        // File.readAsDataURL(input.files[0]);
-                    }
-                }
-            }
+                            $(".remove").click(function(){
+                                $(this).parent(".pip").remove();
+                                console.log(files)
 
-            $("input[type='file']").each(function() {
-                $(this).change(function() {
-                    if (parseInt($(this).get(0).files.length) > 3) {
-                        alert("You can only upload a maximum of 3 images");
-                    } else {
-                        imgToData(this);
+                            });
+                        });
+                        fileReader.readAsDataURL(f);
                     }
                 });
-            });
+            } else {
+                alert("Your browser doesn't support to File API")
+            }
 
+            if (window.File && window.FileList && window.FileReader) {
+                $("#mainImg").on("change", function(e) {
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
+                            $("<span class=\"single\">" +
+                                "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                                "</span>").insertAfter("#mainImg");
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+            } else {
+                alert("Your browser doesn't support to File API")
+            }
 
 
 

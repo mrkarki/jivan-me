@@ -93,6 +93,7 @@ class ManufactureProductController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $product = new ManufactureProduct();
         $product->title = $request['title'];
         $product->slug = $this->slug($product,$request['title']);
