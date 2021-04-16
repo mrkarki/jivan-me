@@ -92,9 +92,12 @@
 </div>
 <h2>Social Media</h2>
 <?php
-$social=$users['social'];
-$social=json_decode($social);
+if(isset($users['social'])){
+    $social=$users['social'];
+    $social=json_decode($social);
 //print_r($social->facebook);
+}
+
 ?>
 <div class="hr-line-dashed"></div>
 <div class="form-group  row">

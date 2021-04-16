@@ -24,8 +24,8 @@ $role = Auth::user()->user_role;
 
 </li>
 
-<li class="">
-    <a href="#" aria-expanded="false">
+<li class="{{ (request()->is('admin/page*')) ? 'active' : '' }}">
+    <a href="{{ route('admin.page.index') }}" aria-expanded="false">
         <i class="far fa-file-alt"></i> <span class="nav-label">Pages </span>
     </a>
 

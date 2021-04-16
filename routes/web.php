@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\admin\ProductAttributeController;
 use App\Http\Controllers\admin\ManufactureProductController;
 use App\Http\Controllers\admin\SettingsController;
+use App\Http\Controllers\admin\PageController;
 use App\Http\Controllers\frontend\ManufacturerUserController;
 use App\Http\Controllers\frontend\WholesalerUserController;
 use App\Http\Controllers\frontend\NormalUserController;
@@ -72,7 +73,9 @@ Route::group(['prefix' => 'admin/', 'as' => 'admin.',  'middleware' => 'auth'], 
     //Route::post('/changepassword', [ProfileController::class, 'changePassword'])->name('changePassword');
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::Post('/settings-update', [SettingsController::class, 'update'])->name('settings.update');
-
+    //
+    Route::get('/page', [PageController::class, 'index'])->name('page.index');
+    Route::Post('/page-update', [PageController::class, 'update'])->name('page.update');
 });
 
 
