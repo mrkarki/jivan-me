@@ -40,5 +40,4 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/responsive.css') }}">
 
     @stack('style')
-
 </head>

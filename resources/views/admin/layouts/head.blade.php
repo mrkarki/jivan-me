@@ -24,5 +24,4 @@
     <link href="{{ asset('assets/admin/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     @stack('style')
-
 </head>
